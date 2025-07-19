@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UrbanVogue - Modern Fashion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e63946;
+            --secondary: #a8dadc;
+            --accent: #457b9d;
+            --light: #f1faee;
+            --dark: #1d3557;
+            --neutral: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--neutral);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        .home-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+        
+        .brand-container {
+            margin-bottom: 3rem;
+            animation: fadeIn 1.5s ease;
+        }
+        
+        .brand-logo {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            text-shadow: 0 0 15px rgba(230, 57, 70, 0.7);
+            animation: pulse 2s infinite;
+        }
+        
+        .brand-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, #f8f9fa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            letter-spacing: 2px;
+        }
+        
+        .brand-tagline {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-style: italic;
+            opacity: 0.9;
+        }
+        
+        /* Category Navigation */
+        .category-nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .category-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            width: 280px;
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .category-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .category-desc {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        .explore-btn {
+            padding: 0.7rem 1.8rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .explore-btn:hover {
+            background-color: white;
+            color: var(--primary);
+            transform: scale(1.05);
+        }
+        
+        /* Category Pages */
+        .category-page {
+            display: none;
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .page-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            color: var(--dark);
+        }
+        
+        .search-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .search-input {
+            padding: 0.8rem 1rem 0.8rem 40px;
+            border-radius: 30px;
+            border: 1px solid #ddd;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+        
+        .subcategories {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .subcategory-btn {
+            padding: 0.5rem 1.5rem;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .subcategory-btn.active, .subcategory-btn:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .product-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-price {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-rating {
+            color: #ffc107;
+            margin-bottom: 1rem;
+        }
+        
+        .add-to-cart {
+            padding: 0.5rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .add-to-cart:hover {
+            background-color: var(--dark);
+        }
+        
+        /* Feedback Section */
+        .feedback-section {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .feedback-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .feedback-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .rating-stars {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .rating-stars i {
+            color: #ffc107;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.2s ease;
+        }
+        
+        .rating-stars i:hover {
+            transform: scale(1.2);
+        }
+        
+        .submit-btn {
+            padding: 0.8rem 2rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .submit-btn:hover {
+            background-color: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        /* Back Button */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .brand-name {
+                font-size: 3rem;
+            }
+            
+            .brand-tagline {
+                font-size: 1.2rem;
+            }
+            
+            .category-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .category-card {
+                width: 100%;
+                max-width: 350px;
+            }
+            
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .search-container {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Home Page -->
+    <div class="home-page" id="home-page">
+        <div class="brand-container">
+            <div class="brand-logo">
+                <i class="fas fa-tshirt"></i>
+            </div>
+            <h1 class="brand-name">URBANVOGUE</h1>
+            <p class="brand-tagline">"Redefining Fashion with Contemporary Styles for the Modern Individual"</p>
+        </div>
+        
+        <div class="category-nav">
+            <!-- Men's Category -->
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-male"></i>
+                </div>
+                <h3 class="category-title">Men's Collection</h3>
+                <p class="category-desc">Trendy outfits for the modern gentleman</p>
+                <a href="#mens-page" class="explore-btn" id="mens-btn">Explore Collection</a>
+            </div>
+            
+            <!-- Women's Category -->
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-female"></i>
+                </div>
+                <h3 class="category-title">Women's Collection</h3>
+                <p class="category-desc">Elegant styles for every occasion</p>
+                <a href="#womens-page" class="explore-btn" id="womens-btn">Explore Collection</a>
+            </div>
+            
+            <!-- Children's Category -->
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-child"></i>
+                </div>
+                <h3 class="category-title">Kids Collection</h3>
+                <p class="category-desc">Adorable outfits for your little ones</p>
+                <a href="#kids-page" class="explore-btn" id="kids-btn">Explore Collection</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Men's Category Page -->
+    <div class="category-page" id="mens-page">
+        <div class="back-btn" id="back-btn">
+            <i class="fas fa-arrow-left"></i>
+        </div>
+        
+        <div class="page-header">
+            <h2 class="page-title">Men's Collection</h2>
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="mens-search" placeholder="Search men's items...">
+            </div>
+        </div>
+        
+        <div class="subcategories">
+            <div class="subcategory-btn active" data-category="all">All</div>
+            <div class="subcategory-btn" data-category="tshirt">T-Shirts</div>
+            <div class="subcategory-btn" data-category="shirt">Shirts</div>
+            <div class="subcategory-btn" data-category="jeans">Jeans</div>
+            <div class="subcategory-btn" data-category="footwear">Footwear</div>
+            <div class="subcategory-btn" data-category="jacket">Jackets</div>
+        </div>
+        
+        <div class="products-grid" id="mens-products">
+            <!-- Products will be loaded here by JavaScript -->
+        </div>
+    </div>
+    
+    <!-- Women's Category Page -->
+    <div class="category-page" id="womens-page">
+        <div class="back-btn" id="back-btn-women">
+            <i class="fas fa-arrow-left"></i>
+        </div>
+        
+        <div class="page-header">
+            <h2 class="page-title">Women's Collection</h2>
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="womens-search" placeholder="Search women's items...">
+            </div>
+        </div>
+        
+        <div class="subcategories">
+            <div class="subcategory-btn active" data-category="all">All</div>
+            <div class="subcategory-btn" data-category="dress">Dresses</div>
+            <div class="subcategory-btn" data-category="kurti">Kurtis</div>
+            <div class="subcategory-btn" data-category="jeans">Jeans</div>
+            <div class="subcategory-btn" data-category="footwear">Footwear</div>
+            <div class="subcategory-btn" data-category="makeup">Makeup</div>
+        </div>
+        
+        <div class="products-grid" id="womens-products">
+            <!-- Products will be loaded here by JavaScript -->
+        </div>
+    </div>
+    
+    <!-- Kids Category Page -->
+    <div class="category-page" id="kids-page">
+        <div class="back-btn" id="back-btn-kids">
+            <i class="fas fa-arrow-left"></i>
+        </div>
+        
+        <div class="page-header">
+            <h2 class="page-title">Kids Collection</h2>
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="kids-search" placeholder="Search kids' items...">
+            </div>
+        </div>
+        
+        <div class="subcategories">
+            <div class="subcategory-btn active" data-category="all">All</div>
+            <div class="subcategory-btn" data-category="tshirt">T-Shirts</div>
+            <div class="subcategory-btn" data-category="dress">Dresses</div>
+            <div class="subcategory-btn" data-category="footwear">Footwear</div>
+            <div class="subcategory-btn" data-category="jacket">Jackets</div>
+            <div class="subcategory-btn" data-category="accessories">Accessories</div>
+        </div>
+        
+        <div class="products-grid" id="kids-products">
+            <!-- Products will be loaded here by JavaScript -->
+        </div>
+    </div>
+    
+    <!-- Feedback Section -->
+    <div class="feedback-section">
+        <h3 class="feedback-title">Share Your Feedback</h3>
+        <form class="feedback-form" id="feedbackForm">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label>Your Rating</label>
+                <div class="rating-stars" id="ratingStars">
+                    <i class="far fa-star" data-rating="1"></i>
+                    <i class="far fa-star" data-rating="2"></i>
+                    <i class="far fa-star" data-rating="3"></i>
+                    <i class="far fa-star" data-rating="4"></i>
+                    <i class="far fa-star" data-rating="5"></i>
+                </div>
+                <input type="hidden" id="rating" name="rating" value="0" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Your Feedback</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">SUBMIT FEEDBACK</button>
+        </form>
+    </div>
+    
+    <script>
+        // Sample product data
+        const products = {
+            mens: [
+                { id: 1, name: "Classic White T-Shirt", category: "tshirt", price: "$24.99", rating: 4, image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" },
+                { id: 2, name: "Graphic Print T-Shirt", category: "tshirt", price: "$29.99", rating: 3, image: "https://images.unsplash.com/photo-1527719327859-c6ce80353573?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" },
+                { id: 3, name: "Casual Button-Up Shirt", category: "shirt", price: "$39.99", rating: 4, image: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80" },
+                { id: 4, name: "Formal Dress Shirt", category: "shirt", price: "$54.99", rating: 4, image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1072&q=80" },
+                { id: 5, name: "Cotton Polo Shirt", category: "shirt", price: "$34.99", rating: 4, image: "https://images.unsplash.com/photo-1578932750355-5eb30ece487a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+                { id: 6, name: "Slim Fit Jeans", category: "jeans", price: "$49.99", rating: 5, image: "https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80" },
+                { id: 7, name: "Regular Fit Jeans", category: "jeans", price: "$45.99", rating: 4, image: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+                { id: 8, name: "Sports Sneakers", category: "footwear", price: "$79.99", rating: 5, image: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1065&q=80" },
+                { id: 9, name: "Casual Loafers", category: "footwear", price: "$64.99", rating: 4, image: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" },
+                { id: 10, name: "Denim Jacket", category: "jacket", price: "$89.99", rating: 5, image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=736&q=80" },
+                { id: 11, name: "Leather Jacket", category: "jacket", price: "$129.99", rating: 5, image: "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+                { id: 12, name: "Athletic Shorts", category: "shorts", price: "$29.99", rating: 3, image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" }
+            ],
+            womens: [
+                { id: 13, name: "Floral Summer Dress", category: "dress", price: "$59.99", rating: 5, image: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+                { id: 14, name: "Evening Gown", category: "dress", price: "$89.99", rating: 5, image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+                { id: 15, name: "Casual Sundress", category: "dress", price: "$49.99", rating: 4, image: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1073&q=80" },
+                { id: 16, name: "Designer Kurti", category: "kurti", price: "$49.99", rating: 4, image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+                { id: 17, name: "Printed Kurti", category: "kurti", price: "$44.99", rating: 4, image: "https://images.unsplash.com/photo-1584375271934-cd0efb3a8d1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+                { id: 18, name: "Skinny Jeans", category: "jeans", price: "$54.99", rating: 4, image: "https://images.unsplash.com/photo-1584375271934-cd0efb3a8d1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+                { id: 19, name: "High Heels", category: "footwear", price: "$89.99", rating: 4, image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" },
+                { id: 20, name: "Casual Sneakers", category: "footwear", price: "$69.99", rating: 4, image: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1065&q=80" },
+                { id: 21, name: "Premium Makeup Kit", category: "makeup", price: "$79.99", rating: 5, image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" },
+                { id: 22, name: "Lipstick Set", category: "makeup", price: "$39.99", rating: 4, image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" },
+                { id: 23, name: "Designer Handbag", category: "accessories", price: "$129.99", rating: 5, image: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=738&q=80" },
+                { id: 24, name: "Elegant Saree", category: "saree", price: "$89.99", rating: 5, image: "https://images.unsplash.com/photo-1595341595379-cf0f0f13d3a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" }
+            ],
+            kids: [
+                { id: 25, name: "Cartoon T-Shirt", category: "tshirt", price: "$19.99", rating: 4, image: "https://images.unsplash.com/photo-1604917019118-ebda7d816e8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+                { id: 26, name: "Superhero T-Shirt", category: "tshirt", price: "$22.99", rating: 5, image: "https://images.unsplash.com/photo-1604917019118-ebda7d816e8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+                { id: 27, name: "Denim Overalls", category: "overalls", price: "$34.99", rating: 5, image: "https://images.unsplash.com/photo-1604917019118-ebda7d816e8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+                { id: 28, name: "Colorful Dress", category: "dress", price: "$29.99", rating: 4, image: "https://images.unsplash.com/photo-1604917019118-ebda7d816e8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+                { id: 29, name: "Princess Dress", category: "dress", price: "$39.99", rating: 5, image: "https://images.unsplash.com/photo-1604917019118-ebda7d816e8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+                { id: 30, name: "Kids Sneakers", category: "footwear", price: "$39.99", rating: 4, image: "https://images.unsplash.com/photo-1605348530920-78b01f6d6d7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+                { id: 31, name: "Sandals", category: "footwear", price: "$29.99", rating: 4, image: "https://images.unsplash.com/photo-1604917019118-ebda7d816e8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+                { id: 32, name: "Winter Jacket", category: "jacket", price: "$49.99", rating: 5, image: "https://images.unsplash.com/photo-1604917019118-ebda7d816e8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+                { id: 33, name: "School Backpack", category: "accessories", price: "$34.99", rating: 4, image: "https://images.unsplash.com/photo-1604917019118-ebda7d816e8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+                { id: 34, name: "Water Bottle", category: "accessories", price: "$14.99", rating: 3, image: "https://images.unsplash.com/photo-1604917019118-ebda7d816e8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+                { id: 35, name: "Cotton Pajamas", category: "pajamas", price: "$24.99", rating: 3, image: "https://images.unsplash.com/photo-1604917019118-ebda7d816e8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+                { id: 36, name: "Swimwear Set", category: "swimwear", price: "$29.99", rating: 4, image: "https://images.unsplash.com/photo-1604917019118-ebda7d816e8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" }
+            ]
+        };
+        
+        // Function to render products
+        function renderProducts(category, containerId, searchTerm = '', filterCategory = 'all') {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            let filteredProducts = products[category];
+            
+            // Apply search filter
+            if (searchTerm) {
+                filteredProducts = filteredProducts.filter(product => 
+                    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            }
+            
+            // Apply category filter
+            if (filterCategory !== 'all') {
+                filteredProducts = filteredProducts.filter(product => 
+                    product.category === filterCategory
+                );
+            }
+            
+            filteredProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="product-price">${product.price}</p>
+                        <div class="product-rating">
+                            ${'<i class="fas fa-star"></i>'.repeat(Math.floor(product.rating))}
+                            ${product.rating % 1 ? '<i class="fas fa-star-half-alt"></i>' : ''}
+                            ${'<i class="far fa-star"></i>'.repeat(5 - Math.ceil(product.rating))}
+                            <span>(${product.rating})</span>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                `;
+                
+                container.appendChild(productCard);
+            });
+        }
+        
+        // Navigation between pages
+        function showPage(pageId) {
+            document.getElementById('home-page').style.display = 'none';
+            document.getElementById('mens-page').style.display = 'none';
+            document.getElementById('womens-page').style.display = 'none';
+            document.getElementById('kids-page').style.display = 'none';
+            
+            document.getElementById(pageId).style.display = 'block';
+            
+            // Render products for the page
+            if (pageId === 'mens-page') {
+                renderProducts('mens', 'mens-products');
+            } else if (pageId === 'womens-page') {
+                renderProducts('womens', 'womens-products');
+            } else if (pageId === 'kids-page') {
+                renderProducts('kids', 'kids-products');
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
+        // Event listeners for category buttons
+        document.getElementById('mens-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            showPage('mens-page');
+        });
+        
+        document.getElementById('womens-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            showPage('womens-page');
+        });
+        
+        document.getElementById('kids-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            showPage('kids-page');
+        });
+        
+        // Back button functionality
+        document.getElementById('back-btn').addEventListener('click', function() {
+            showPage('home-page');
+        });
+        
+        document.getElementById('back-btn-women').addEventListener('click', function() {
+            showPage('home-page');
+        });
+        
+        document.getElementById('back-btn-kids').addEventListener('click', function() {
+            showPage('home-page');
+        });
+        
+        // Search functionality
+        document.getElementById('mens-search').addEventListener('input', function() {
+            const activeCategory = document.querySelector('#mens-page .subcategory-btn.active').dataset.category;
+            renderProducts('mens', 'mens-products', this.value, activeCategory);
+        });
+        
+        document.getElementById('womens-search').addEventListener('input', function() {
+            const activeCategory = document.querySelector('#womens-page .subcategory-btn.active').dataset.category;
+            renderProducts('womens', 'womens-products', this.value, activeCategory);
+        });
+        
+        document.getElementById('kids-search').addEventListener('input', function() {
+            const activeCategory = document.querySelector('#kids-page .subcategory-btn.active').dataset.category;
+            renderProducts('kids', 'kids-products', this.value, activeCategory);
+        });
+        
+        // Subcategory filter functionality
+        document.querySelectorAll('#mens-page .subcategory-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('#mens-page .subcategory-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const searchTerm = document.getElementById('mens-search').value;
+                renderProducts('mens', 'mens-products', searchTerm, this.dataset.category);
+            });
+        });
+        
+        document.querySelectorAll('#womens-page .subcategory-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('#womens-page .subcategory-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const searchTerm = document.getElementById('womens-search').value;
+                renderProducts('womens', 'womens-products', searchTerm, this.dataset.category);
+            });
+        });
+        
+        document.querySelectorAll('#kids-page .subcategory-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('#kids-page .subcategory-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const searchTerm = document.getElementById('kids-search').value;
+                renderProducts('kids', 'kids-products', searchTerm, this.dataset.category);
+            });
+        });
+        
+        // Star rating for feedback
+        const stars = document.querySelectorAll('#ratingStars i');
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const rating = parseInt(this.getAttribute('data-rating'));
+                document.getElementById('rating').value = rating;
+                
+                stars.forEach((s, index) => {
+                    if (index < rating) {
+                        s.classList.remove('far');
+                        s.classList.add('fas');
+                    } else {
+                        s.classList.remove('fas');
+                        s.classList.add('far');
+                    }
+                });
+            });
+        });
+        
+        // Feedback form submission
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const rating = document.getElementById('rating').value;
+            const message = document.getElementById('message').value;
+            
+            if (!name || !email || rating === "0" || !message) {
+                alert('Please fill all fields and provide a rating!');
+                return;
+            }
+            
+            // Here you would typically send the data to a server
+            console.log({ name, email, rating, message });
+            
+            alert('Thank you for your feedback! We appreciate your input.');
+            this.reset();
+            
+            // Reset stars
+            stars.forEach(star => {
+                star.classList.remove('fas');
+                star.classList.add('far');
+            });
+            document.getElementById('rating').value = "0";
+        });
+    </script>
+</body>
+</html>
