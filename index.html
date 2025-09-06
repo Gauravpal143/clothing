@@ -526,6 +526,19 @@
             transform: scale(1.1);
         }
         
+        /* Empty Cart Styling */
+        .empty-cart {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+        
+        .empty-cart p:first-child {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -584,6 +597,24 @@
                 margin-bottom: 1rem;
             }
         }
+        
+        @media (max-width: 480px) {
+            .brand-name {
+                font-size: 2.5rem;
+            }
+            
+            .brand-tagline {
+                font-size: 1rem;
+            }
+            
+            .category-card {
+                padding: 1.5rem;
+            }
+            
+            .confirmation-box {
+                padding: 2rem 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -605,7 +636,7 @@
                 </div>
                 <h3 class="category-title">Men's Collection</h3>
                 <p class="category-desc">Trendy outfits for the modern gentleman</p>
-                <a href="#mens-page" class="explore-btn" id="mens-btn">Explore Collection</a>
+                <button class="explore-btn" id="mens-btn">Explore Collection</button>
             </div>
             
             <!-- Women's Category -->
@@ -615,7 +646,7 @@
                 </div>
                 <h3 class="category-title">Women's Collection</h3>
                 <p class="category-desc">Elegant styles for every occasion</p>
-                <a href="#womens-page" class="explore-btn" id="womens-btn">Explore Collection</a>
+                <button class="explore-btn" id="womens-btn">Explore Collection</button>
             </div>
             
             <!-- Children's Category -->
@@ -625,14 +656,14 @@
                 </div>
                 <h3 class="category-title">Kids Collection</h3>
                 <p class="category-desc">Adorable outfits for your little ones</p>
-                <a href="#kids-page" class="explore-btn" id="kids-btn">Explore Collection</a>
+                <button class="explore-btn" id="kids-btn">Explore Collection</button>
             </div>
         </div>
     </div>
     
     <!-- Men's Category Page -->
     <div class="category-page" id="mens-page">
-        <div class="back-btn" id="back-btn">
+        <div class="back-btn" id="back-btn-mens">
             <i class="fas fa-arrow-left"></i>
         </div>
         
@@ -660,7 +691,7 @@
     
     <!-- Women's Category Page -->
     <div class="category-page" id="womens-page">
-        <div class="back-btn" id="back-btn-women">
+        <div class="back-btn" id="back-btn-womens">
             <i class="fas fa-arrow-left"></i>
         </div>
         
@@ -704,6 +735,7 @@
             <div class="subcategory-btn active" data-category="all">All</div>
             <div class="subcategory-btn" data-category="tshirt">T-Shirts</div>
             <div class="subcategory-btn" data-category="dress">Dresses</div>
+            <div class="subcategory-btn" data-category="overalls">Overalls</div>
             <div class="subcategory-btn" data-category="footwear">Footwear</div>
             <div class="subcategory-btn" data-category="jacket">Jackets</div>
             <div class="subcategory-btn" data-category="accessories">Accessories</div>
@@ -792,9 +824,9 @@
                 { id: 11, name: "Floral Summer Dress", category: "dress", price: 899, rating: 5, image: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
                 { id: 12, name: "Evening Gown", category: "dress", price: 999, rating: 5, image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
                 { id: 13, name: "Casual Sundress", category: "dress", price: 799, rating: 4, image: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1073&q=80" },
-                { id: 14, name: "Designer Kurti", category: "kurti", price: 699, rating: 4, image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+                { id: 14, name: "Designer Kurti", category: "kurti", price: 699, rating: 4, image: "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
                 { id: 15, name: "Printed Kurti", category: "kurti", price: 649, rating: 4, image: "https://images.unsplash.com/photo-1584375271934-cd0efb3a8d1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
-                { id: 16, name: "Skinny Jeans", category: "jeans", price: 799, rating: 4, image: "https://images.unsplash.com/photo-1584375271934-cd0efb3a8d1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+                { id: 16, name: "Skinny Jeans", category: "jeans", price: 799, rating: 4, image: "https://images.unsplash.com/photo-1599249300675-c39f1dd2d6be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
                 { id: 17, name: "High Heels", category: "footwear", price: 899, rating: 4, image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" },
                 { id: 18, name: "Casual Sneakers", category: "footwear", price: 799, rating: 4, image: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1065&q=80" },
                 { id: 19, name: "Premium Makeup Kit", category: "makeup", price: 899, rating: 5, image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" }
@@ -807,7 +839,8 @@
                 { id: 24, name: "Princess Dress", category: "dress", price: 699, rating: 5, image: "https://images.unsplash.com/photo-1595341595379-cf0f0f13d3a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
                 { id: 25, name: "Kids Sneakers", category: "footwear", price: 599, rating: 4, image: "https://images.unsplash.com/photo-1605348530920-78b01f6d6d7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
                 { id: 26, name: "Sandals", category: "footwear", price: 449, rating: 4, image: "https://images.unsplash.com/photo-1585155770447-2f66e2a397b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" },
-                { id: 27, name: "Winter Jacket", category: "jacket", price: 799, rating: 5, image: "https://images.unsplash.com/photo-1622288432450-277d0fef8ae8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" }
+                { id: 27, name: "Winter Jacket", category: "jacket", price: 799, rating: 5, image: "https://images.unsplash.com/photo-1622288432450-277d0fef8ae8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" },
+                { id: 28, name: "Kids Sunglasses", category: "accessories", price: 299, rating: 4, image: "https://images.unsplash.com/photo-1588943211346-0908a1fb0b01?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80" }
             ]
         };
         
@@ -841,7 +874,7 @@
                 productCard.dataset.id = product.id;
                 
                 // Format price as Indian Rupees
-                const formattedPrice = ₹${product.price};
+                const formattedPrice = '\u20B9' + product.price;
                 
                 productCard.innerHTML = `
                     <img src="${product.image}" alt="${product.name}" class="product-img">
@@ -912,7 +945,7 @@
             // Update cart count badge
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             document.getElementById('cart-count').textContent = totalItems;
-            document.getElementById('cart-total-items').textContent = ${totalItems} ${totalItems === 1 ? 'item' : 'items'};
+            document.getElementById('cart-total-items').textContent = `${totalItems} ${totalItems === 1 ? 'item' : 'items'}`;
             
             // Render cart items
             const cartItemsEl = document.getElementById('cart-items');
@@ -938,8 +971,8 @@
                 const itemTotal = item.price * item.quantity;
                 subtotal += itemTotal;
                 
-                const formattedPrice = ₹${item.price};
-                const formattedTotal = ₹${item.price * item.quantity};
+                const formattedPrice = '\u20B9' + item.price;
+                const formattedTotal = '\u20B9' + (item.price * item.quantity);
                 
                 const cartItem = document.createElement('div');
                 cartItem.className = 'cart-item';
@@ -968,9 +1001,9 @@
             const total = subtotal + tax;
             
             // Update summary
-            document.getElementById('cart-subtotal').textContent = ₹${subtotal};
-            document.getElementById('cart-tax').textContent = ₹${Math.round(tax)};
-            document.getElementById('cart-total').textContent = ₹${Math.round(total)};
+            document.getElementById('cart-subtotal').textContent = '₹' + subtotal;
+            document.getElementById('cart-tax').textContent = '₹' + Math.round(tax);
+            document.getElementById('cart-total').textContent = '₹' + Math.round(total);
             
             // Add event listeners to quantity buttons
             document.querySelectorAll('.quantity-btn.minus').forEach(button => {
@@ -1012,12 +1045,14 @@
         
         // Navigation between pages
         function showPage(pageId) {
+            // Hide all pages
             document.getElementById('home-page').style.display = 'none';
             document.getElementById('mens-page').style.display = 'none';
             document.getElementById('womens-page').style.display = 'none';
             document.getElementById('kids-page').style.display = 'none';
             document.getElementById('cart-page').style.display = 'none';
             
+            // Show the requested page
             document.getElementById(pageId).style.display = 'block';
             
             // Render products for the page
@@ -1035,113 +1070,113 @@
             window.scrollTo(0, 0);
         }
         
-        // Event listeners for category buttons
-        document.getElementById('mens-btn').addEventListener('click', function(e) {
-            e.preventDefault();
-            showPage('mens-page');
-        });
-        
-        document.getElementById('womens-btn').addEventListener('click', function(e) {
-            e.preventDefault();
-            showPage('womens-page');
-        });
-        
-        document.getElementById('kids-btn').addEventListener('click', function(e) {
-            e.preventDefault();
-            showPage('kids-page');
-        });
-        
-        // Cart button
-        document.getElementById('cart-icon').addEventListener('click', function() {
-            showPage('cart-page');
-        });
-        
-        // Back button functionality
-        document.getElementById('back-btn').addEventListener('click', function() {
-            showPage('home-page');
-        });
-        
-        document.getElementById('back-btn-women').addEventListener('click', function() {
-            showPage('home-page');
-        });
-        
-        document.getElementById('back-btn-kids').addEventListener('click', function() {
-            showPage('home-page');
-        });
-        
-        document.getElementById('back-btn-cart').addEventListener('click', function() {
-            showPage('home-page');
-        });
-        
-        // Search functionality
-        document.getElementById('mens-search').addEventListener('input', function() {
-            const activeCategory = document.querySelector('#mens-page .subcategory-btn.active').dataset.category;
-            renderProducts('mens', 'mens-products', this.value, activeCategory);
-        });
-        
-        document.getElementById('womens-search').addEventListener('input', function() {
-            const activeCategory = document.querySelector('#womens-page .subcategory-btn.active').dataset.category;
-            renderProducts('womens', 'womens-products', this.value, activeCategory);
-        });
-        
-        document.getElementById('kids-search').addEventListener('input', function() {
-            const activeCategory = document.querySelector('#kids-page .subcategory-btn.active').dataset.category;
-            renderProducts('kids', 'kids-products', this.value, activeCategory);
-        });
-        
-        // Subcategory filter functionality
-        document.querySelectorAll('#mens-page .subcategory-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('#mens-page .subcategory-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                const searchTerm = document.getElementById('mens-search').value;
-                renderProducts('mens', 'mens-products', searchTerm, this.dataset.category);
+        // Initialize event listeners after DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Event listeners for category buttons
+            document.getElementById('mens-btn').addEventListener('click', function() {
+                showPage('mens-page');
             });
-        });
-        
-        document.querySelectorAll('#womens-page .subcategory-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('#womens-page .subcategory-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                const searchTerm = document.getElementById('womens-search').value;
-                renderProducts('womens', 'womens-products', searchTerm, this.dataset.category);
-            });
-        });
-        
-        document.querySelectorAll('#kids-page .subcategory-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('#kids-page .subcategory-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                const searchTerm = document.getElementById('kids-search').value;
-                renderProducts('kids', 'kids-products', searchTerm, this.dataset.category);
-            });
-        });
-        
-        // Checkout functionality
-        document.getElementById('checkout-btn').addEventListener('click', function() {
-            if (cart.length === 0) {
-                alert('Your cart is empty!');
-                return;
-            }
             
-            // Show purchase confirmation
-            document.getElementById('purchase-confirmation').style.display = 'flex';
-        });
-        
-        // Purchase confirmation button
-        document.getElementById('confirmation-btn').addEventListener('click', function() {
-            // Clear cart
-            cart = [];
-            saveCart();
+            document.getElementById('womens-btn').addEventListener('click', function() {
+                showPage('womens-page');
+            });
+            
+            document.getElementById('kids-btn').addEventListener('click', function() {
+                showPage('kids-page');
+            });
+            
+            // Cart button
+            document.getElementById('cart-icon').addEventListener('click', function() {
+                showPage('cart-page');
+            });
+            
+            // Back button functionality
+            document.getElementById('back-btn-mens').addEventListener('click', function() {
+                showPage('home-page');
+            });
+            
+            document.getElementById('back-btn-womens').addEventListener('click', function() {
+                showPage('home-page');
+            });
+            
+            document.getElementById('back-btn-kids').addEventListener('click', function() {
+                showPage('home-page');
+            });
+            
+            document.getElementById('back-btn-cart').addEventListener('click', function() {
+                showPage('home-page');
+            });
+            
+            // Search functionality
+            document.getElementById('mens-search').addEventListener('input', function() {
+                const activeCategory = document.querySelector('#mens-page .subcategory-btn.active').dataset.category;
+                renderProducts('mens', 'mens-products', this.value, activeCategory);
+            });
+            
+            document.getElementById('womens-search').addEventListener('input', function() {
+                const activeCategory = document.querySelector('#womens-page .subcategory-btn.active').dataset.category;
+                renderProducts('womens', 'womens-products', this.value, activeCategory);
+            });
+            
+            document.getElementById('kids-search').addEventListener('input', function() {
+                const activeCategory = document.querySelector('#kids-page .subcategory-btn.active').dataset.category;
+                renderProducts('kids', 'kids-products', this.value, activeCategory);
+            });
+            
+            // Subcategory filter functionality
+            document.querySelectorAll('#mens-page .subcategory-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('#mens-page .subcategory-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const searchTerm = document.getElementById('mens-search').value;
+                    renderProducts('mens', 'mens-products', searchTerm, this.dataset.category);
+                });
+            });
+            
+            document.querySelectorAll('#womens-page .subcategory-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('#womens-page .subcategory-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const searchTerm = document.getElementById('womens-search').value;
+                    renderProducts('womens', 'womens-products', searchTerm, this.dataset.category);
+                });
+            });
+            
+            document.querySelectorAll('#kids-page .subcategory-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('#kids-page .subcategory-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const searchTerm = document.getElementById('kids-search').value;
+                    renderProducts('kids', 'kids-products', searchTerm, this.dataset.category);
+                });
+            });
+            
+            // Checkout functionality
+            document.getElementById('checkout-btn').addEventListener('click', function() {
+                if (cart.length === 0) {
+                    alert('Your cart is empty!');
+                    return;
+                }
+                
+                // Show purchase confirmation
+                document.getElementById('purchase-confirmation').style.display = 'flex';
+            });
+            
+            // Purchase confirmation button
+            document.getElementById('confirmation-btn').addEventListener('click', function() {
+                // Clear cart
+                cart = [];
+                saveCart();
+                updateCart();
+                
+                // Hide confirmation and return to home
+                document.getElementById('purchase-confirmation').style.display = 'none';
+                showPage('home-page');
+            });
+            
+            // Initialize cart
             updateCart();
-            
-            // Hide confirmation and return to home
-            document.getElementById('purchase-confirmation').style.display = 'none';
-            showPage('home-page');
         });
-        
-        // Initialize cart
-        updateCart();
     </script>
 </body>
 </html>
